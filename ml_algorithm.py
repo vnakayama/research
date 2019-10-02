@@ -39,8 +39,17 @@ observed_maps_masks_dict = {"SMICA":"",
 
 # Define parameters for the given topology as [n_max,L,L_z,L/Lz]
 
-topology_restraints = {"SLAB":[[4,4,1.2,4/1.2],[4,4,1.4,4/1.4],[4,4,1.6,4/1.6],[4,4,1.8,4/1.8]],
-                       "TORUS":[[4,1.2,1.2,4/1.2],[4,1.4,1.4,4/1.4],[4,1.6,1.6,4/1.6],[4,1.8,1.8,4/1.8]]
+topology_restraints = {"SLAB":[[4.0,4.0,1.0,4/1.0],
+                               [4.0,4.0,1.2,4/1.2],
+                               [4.0,4,1.4,4/1.4],
+                               [4.0,4,1.6,4/1.6],
+                               [4.0,4,1.8,4/1.8],
+                               [4.0,4,2.0,4/1.2],
+                               [4.0,4.0,4.0,4.0/4.0]],
+                       "TORUS":[[4,1.2,1.2,4/1.2],
+                               [4,1.4,1.4,4/1.4],
+                               [4,1.6,1.6,4/1.6],
+                               [4,1.8,1.8,4/1.8]]
 } # don't use TORUS yet
 
 # Restraints calculus
@@ -81,7 +90,7 @@ def vectors(topology):
 
 # Simulation
 def simulated_maps(topology,l_max,Nside):
-    angles = list()
+    angles = list() # angle matrix
     for vector in vectors(topology).keys():
         angles.append(list(hp.vec2ang(np.array(vectors(topology)[vector][0]))))
     l, m  = hp.Alm.getlm(l_max)
